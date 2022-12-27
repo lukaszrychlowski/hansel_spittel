@@ -5,6 +5,7 @@ import random
 from pyqtgraph import PlotWidget, plot, QtCore, QtGui
 import pyqtgraph as pg
 import numpy as np
+import time
 
 class MainWindow(QtWidgets.QWidget):
     def __init__(self):
@@ -29,16 +30,21 @@ class MainWindow(QtWidgets.QWidget):
         #quit button
         self.btn = QtWidgets.QPushButton('Quit', self)
         self.btn.clicked.connect(self.close_app)
-        
+        self.pause_btn = QtWidgets.QPushButton('Stop', self)
+        self.pause_btn.clicked.connect(self.sleep)
         #layout
         layout = QtWidgets.QGridLayout()
         self.setLayout(layout)
         layout.addWidget(self.plot,0,0)
-        layout.addWidget(self.btn,1,0)
+        layout.addWidget(self.btn,0,1)
+        layout.addWidget(self.pause_btn,1,1)
 
     def close_app(self):
         sys.exit('app closed!')
-    
+
+    def sleep(self):
+        time.sleep(10)
+
     def gen_new_data(self):
         self.x = []
         self.y = []
